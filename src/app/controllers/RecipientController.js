@@ -10,14 +10,27 @@ class RecipientController {
       return res.status(400).json({ error: 'User already exists.' });
     }
 
-    // const recipient = await Recipient.create(req.body);
-    const recipient = req.body;
+    const recipient = await Recipient.create(req.body);
 
     return res.json(recipient);
   }
 
   async edit(req, res) {
-    return res.json({ message: 'Route for editing recipients' });
+    const { email } = req.body;
+
+    let recipient = await Recipient.findByPk(req.recipientId);
+
+    if (email && email !== recipient.email) {
+      const recipientExists = await Recipient.findOne({ where: { email } });
+
+      if (recipientExists) {
+        return res.status(400).json({ error: 'Recipient already exists' });
+      }
+    }
+
+    recipient = await recipient.update(req.body);
+
+    return res.json(recipient);
   }
 }
 
