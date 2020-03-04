@@ -41,7 +41,7 @@ In order to create a seed, run the following command in your terminal:
 
 The create filed will be in the folder `src/database/seeds`. The code bellow was added to create an admin user:
 
-    ```javascript
+    
     const bcrypt = require('bcryptjs');
 
     module.exports = {
@@ -64,7 +64,7 @@ The create filed will be in the folder `src/database/seeds`. The code bellow was
 
       down: () => {},
     };
-    ```
+    
 
 Executed:
 
